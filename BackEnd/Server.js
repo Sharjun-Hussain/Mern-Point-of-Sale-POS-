@@ -24,7 +24,7 @@ ConnectDB();
 app.use(cors());
 app.use(express.json());
 
-app.post("/api/", userRoute);
+app.use("/api/users", userRoute);
 
 app.listen(process.env.PORT, (con) => {
   console.log(`Server Is listening  : ${process.env.PORT} `);
