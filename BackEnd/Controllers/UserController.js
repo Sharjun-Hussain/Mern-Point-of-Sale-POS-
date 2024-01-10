@@ -12,3 +12,15 @@ exports.RegisterUser = async (req, res, next) => {
     })
   }
 };
+
+
+exports.LoginUser = async (req,res,next) =>{
+    const username = req.body;
+    const password = req.body.password;
+
+    res.status(200).json({
+        success:"true",
+        username ,
+        password
+    })
+}
