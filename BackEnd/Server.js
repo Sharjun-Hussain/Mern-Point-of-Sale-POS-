@@ -3,6 +3,7 @@ const cors = require("cors");
 const mongoo = require("mongoose");
 const dotenv = require("dotenv");
 const userRoute = require("./Routes/User-Routes");
+const productRoute = require('./Routes/Product-Routes')
 const cookieParcer = require('cookie-parser')
 
 dotenv.config({ path: ".env" });
@@ -27,6 +28,7 @@ app.use(cookieParcer());
 app.use(express.json());
 
 app.use("/api/users", userRoute);
+app.use("/api/products", productRoute);
 
 app.listen(process.env.PORT, (con) => {
   console.log(`Server Is listening  : ${process.env.PORT} `);
