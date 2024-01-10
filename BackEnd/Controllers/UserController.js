@@ -79,3 +79,11 @@ exports.LoginUser = async (req, res, next) => {
 exports.signout = (req,res,next) =>{
   res.clearCookie('token').json({Message:"Logout SuccessFully!"}).status(200);
 }
+
+exports.listuser = (req,res,next) =>{
+  const userss = usersModel.find();
+
+  res.status(200).json({
+    userss
+  })
+}

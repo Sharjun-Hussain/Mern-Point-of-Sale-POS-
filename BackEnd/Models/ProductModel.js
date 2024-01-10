@@ -10,20 +10,20 @@ const ProductModel = new mongoose.Schema({
     required: true,
   },
   size: {
-    type: Number,
+    type: String,
     required: true,
   },
   stock: {
-    type: Number,
+    type: String,
     required: true,
   },
   images: {
-    filename: {
-      type: String,
+    
+      type: [String]
       
     },
   }
-});
+);
 
 
 const products = mongoose.model('product', ProductModel);

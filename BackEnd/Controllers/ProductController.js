@@ -16,11 +16,12 @@ exports.CreateProduct = (req,res,next) =>{
 
 }
 
-exports.listProduct = (req,res,next)=>{
+exports.listProduct = async (req,res,next)=>{
     try{
-        const products = productmodel.find();
+        const products = await productmodel.find();
         res.status(200).json({
-            
+           products,
+           count:products.length
         })
     }catch(err){
         res.status(500).json({Message:"Internal Server Error"});
