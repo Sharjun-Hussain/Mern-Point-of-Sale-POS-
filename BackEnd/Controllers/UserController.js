@@ -4,9 +4,9 @@ const bcrypt = require("bcryptjs");
 
 exports.RegisterUser = async (req, res, next) => {
   const userDataFromReguest = req.body;
-  const { username, email, password } = req.body;
+  const { username, email,role, password } = req.body;
 
-  if (!username || !email || !password) {
+  if (!username || !email || !role || !password) {
     return res
       .status(400)
       .json({ Message: "Please Completly Fill THe Input Fields" });
@@ -21,7 +21,7 @@ exports.RegisterUser = async (req, res, next) => {
     const generatedToken = user.generatejwtToken();
 
     if (user) {
-      res.status(200).json({
+      res.status(200).cookie('token',generatedToken,{httponly:true}).json({
         Message: " Your Account Creation SuccessFull! ",
         generatedToken,
       });
@@ -30,7 +30,7 @@ exports.RegisterUser = async (req, res, next) => {
 
   if (ExistingUser) {
     return res.status(400).json({
-      Message: " User Is Already Found Please Sign In",
+      Message: " User Already Found Please Sign In",
     });
   }
 };
@@ -61,7 +61,7 @@ exports.LoginUser = async (req, res, next) => {
         }
 
         const generatedToken = user.generatejwtToken();
-        res.status(200).json({
+        res.status(200).cookie('token',generatedToken,{httponly:true}).json({
           Message: "Login SuccessFull",
           generatedToken,
           user,
@@ -74,3 +74,8 @@ exports.LoginUser = async (req, res, next) => {
     });
   }
 };
+
+
+exports.signout = (req,res,next) =>{
+  res.clearCookie('token').json({Message:"Logout SuccessFully!"}).status(200);
+}
